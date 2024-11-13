@@ -13,7 +13,7 @@
 #define NORMAL_STATE SET
 #define PRESSED_STATE RESET
 
-extern int button1_flag;
+//extern int button_flag[buttonNums];
 
 void getKeyInput();
 

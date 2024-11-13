@@ -5,65 +5,77 @@
  *      Author: thaik
  */
 #include "button.h"
-int KeyReg0 = NORMAL_STATE;
-int KeyReg1 = NORMAL_STATE;
-int KeyReg2 = NORMAL_STATE;
-int KeyReg3 = NORMAL_STATE;
 
-int TimeOutForKeyPress =  500;
-int button1_pressed = 0;
-int button1_long_pressed = 0;
-int button1_flag = 0;
+#define buttonNums 3
 
-int isButton1Pressed(){
-	if(button1_flag == 1){
-		button1_flag = 0;
+int KeyReg0[buttonNums] = {NORMAL_STATE, NORMAL_STATE, NORMAL_STATE};
+int KeyReg1[buttonNums] = {NORMAL_STATE, NORMAL_STATE, NORMAL_STATE};
+int KeyReg2[buttonNums] = {NORMAL_STATE, NORMAL_STATE, NORMAL_STATE};
+int KeyReg3[buttonNums] = {NORMAL_STATE, NORMAL_STATE, NORMAL_STATE};
+
+int TimeOutForKeyPress[buttonNums] =  {50, 50, 50};
+int button_pressed[buttonNums] = {0, 0, 0};
+int button_long_pressed[buttonNums] = {0, 0, 0};
+int button_flag[buttonNums] = {0, 0, 0};
+
+int isButtonPressed(int index){
+	if(button_flag[index] == 1){
+		button_flag[index] = 0;
 		return 1;
 	}
 	return 0;
 }
 
-int isButton1LongPressed(){
-	if(button1_long_pressed == 1){
-		button1_long_pressed = 0;
+int isButtonLongPressed(int index){
+	if(button_long_pressed[index] == 1){
+		button_long_pressed[index] = 0;
 		return 1;
 	}
 	return 0;
 }
 
-void subKeyProcess(){
+void subKeyProcess(int index){
 	//TODO
 	//HAL_GPIO_TogglePin(LED1_GPIO_Port, LED1_Pin);
-	button1_flag = 1;
+	button_flag[index] = 1;
 }
 
 void getKeyInput(){
-  KeyReg2 = KeyReg1;
-  KeyReg1 = KeyReg0;
-  // Add your key
-  KeyReg0 = HAL_GPIO_ReadPin(BUTTON_GPIO_Port, BUTTON_Pin);
-
-  if ((KeyReg1 == KeyReg0) && (KeyReg1 == KeyReg2)){
-    if (KeyReg2 != KeyReg3){
-      KeyReg3 = KeyReg2;
-
-      if (KeyReg3 == PRESSED_STATE){
-        TimeOutForKeyPress = 500;
-        //subKeyProcess();
-        button1_flag = 1;
-      }
-
-    }else{
-        TimeOutForKeyPress --;
-        if (TimeOutForKeyPress == 0){
-        	TimeOutForKeyPress = 500;
-        	if (KeyReg3 == PRESSED_STATE){
-        		//subKeyProcess();
-        		button1_flag = 1;
-        	}
-        }
-    }
-  }
+	for(int i = 0; i < buttonNums; i++) {
+		KeyReg2[i] = KeyReg1[i];
+		KeyReg1[i] = KeyReg0[i];
+		// Add your key
+		switch (i) {
+			case 0:
+				KeyReg0[i] = HAL_GPIO_ReadPin(SELECT_GPIO_Port, SELECT_Pin);
+				break;
+			case 1:
+				KeyReg0[i] = HAL_GPIO_ReadPin(MOFIDY_GPIO_Port, MOFIDY_Pin);
+				break;
+			case 2:
+				KeyReg0[i] = HAL_GPIO_ReadPin(SET_GPIO_Port, SET_Pin);
+				break;
+		}
+		if ((KeyReg1[i] == KeyReg0[i]) && (KeyReg1[i] == KeyReg2[i])){
+			if (KeyReg2[i] != KeyReg3[i]){
+				KeyReg3[i] = KeyReg2[i];
+				if (KeyReg3[i] == PRESSED_STATE){
+					TimeOutForKeyPress[i] = 500;
+					//subKeyProcess();
+					button_flag[i] = 1;
+				}
+			} else{
+				TimeOutForKeyPress[i] --;
+				if (TimeOutForKeyPress[i] == 0){
+					TimeOutForKeyPress[i] = 500;
+					if (KeyReg3[i] == PRESSED_STATE){
+						//subKeyProcess();
+						button_flag[i] = 1;
+					}
+				}
+			}
+		}
+	}
 }
 
 

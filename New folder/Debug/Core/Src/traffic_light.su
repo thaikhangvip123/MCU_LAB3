@@ -1,0 +1,13 @@
+traffic_light.c:14:6:trafficG_R	8	static
+traffic_light.c:22:6:trafficY_R	8	static
+traffic_light.c:30:6:trafficR_G	8	static
+traffic_light.c:38:6:trafficR_Y	8	static
+traffic_light.c:47:6:updateTime	4	static
+traffic_light.c:80:6:setTimeRED	16	static
+traffic_light.c:83:6:setTimeYELLOW	16	static
+traffic_light.c:86:6:setTimeGREEN	16	static
+traffic_light.c:89:6:RedBlinky	8	static
+traffic_light.c:97:6:YellowBlinky	8	static
+traffic_light.c:105:6:GreenBlinky	8	static
+traffic_light.c:113:6:LedBlinky	8	static
+traffic_light.c:121:6:clearLed	8	static
