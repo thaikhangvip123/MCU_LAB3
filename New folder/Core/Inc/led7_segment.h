@@ -10,8 +10,8 @@
 
 #include "main.h"
 
-int buffer[4] = {1, 2, 3, 4};
-int controllPin[4] = {EN0_Pin, EN1_Pin, EN2_Pin, EN3_Pin};
+extern int buffer7SEG[4];
+extern int controllPin7SEG[4];
 void clearLed();
 void display7SEG(int num);
 void update7SEG(int index);

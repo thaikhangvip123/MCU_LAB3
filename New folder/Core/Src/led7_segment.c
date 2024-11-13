@@ -8,6 +8,8 @@
 #include "led7_segment.h"
 #include "software_timer.h"
 
+int buffer7SEG[4] = {1, 2, 3, 4};
+int controllPin7SEG[4] = {EN0_Pin, EN1_Pin, EN2_Pin, EN3_Pin};
 void clear() {
 	HAL_GPIO_WritePin(GPIOA, EN0_Pin | EN1_Pin | EN2_Pin | EN3_Pin, SET);
 }
@@ -19,7 +21,7 @@ void display7SEG(int num) {
 	}
 }
 void enable(int pin) {
-	HAL_GPIO_WritePin(GPIOA, controllPin[pin], RESET);
+	HAL_GPIO_WritePin(GPIOA, controllPin7SEG[pin], RESET);
 }
 void EnableLed() {
 	HAL_GPIO_WritePin(EN0_GPIO_Port, EN0_Pin, 1);
@@ -33,22 +35,22 @@ void update7SEG(int index) {
 	EnableLed();
 	switch (index) {
 		case 0: {
-			display7SEG(buffer[0]);
+			display7SEG(buffer7SEG[0]);
 			enable(0);
 			break;
 		}
 		case 1: {
-			display7SEG(buffer[1]);
+			display7SEG(buffer7SEG[1]);
 			enable(1);
 			break;
 		}
 		case 2: {
-			display7SEG(buffer[2]);
+			display7SEG(buffer7SEG[2]);
 			enable(2);
 			break;
 		}
 		case 3: {
-			display7SEG(buffer[3]);
+			display7SEG(buffer7SEG[3]);
 			enable(3);
 			break;
 		}
@@ -57,10 +59,10 @@ void update7SEG(int index) {
 	}
 }
 void updateClockBuffer1(int value) {
-	buffer[0] = value / 10;
-	buffer[1] = value % 10;
+	buffer7SEG[0] = value / 10;
+	buffer7SEG[1] = value % 10;
 }
 void updateClockBuffer2(int value) {
-	buffer[2] = value / 10;
-	buffer[3] = value % 10;
+	buffer7SEG[2] = value / 10;
+	buffer7SEG[3] = value % 10;
 }

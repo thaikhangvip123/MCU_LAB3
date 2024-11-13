@@ -39,7 +39,7 @@ void setTimer5(int duration) {
   timer5_counter = duration / TIMER_CYCLE;
   timer5_flag = 0;
 }
-void timer_run(){
+void timer_Run(){
 	if(timer1_counter > 0){
 		timer1_counter--;
 		if(timer1_counter == 0) timer1_flag = 1;

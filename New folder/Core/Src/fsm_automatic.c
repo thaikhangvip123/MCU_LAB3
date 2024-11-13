@@ -11,7 +11,7 @@ int cdY = 0;
 
 void fsm_automatic_run() {
 	switch(status) {
-		case AUTO: {
+		case AUTO:
 			if (1) {
 				status = G_R;
 				cdX = timerGreen - 1;
@@ -22,8 +22,7 @@ void fsm_automatic_run() {
 				setTimer2(1000);
 			}
 			break;
-		}
-		case G_R: {
+		case G_R:
 			trafficG_R();
 			if (timer1_flag == 1) {
 				status = Y_R;
@@ -40,13 +39,13 @@ void fsm_automatic_run() {
 			}
 			if (isButtonPressed(0)) {
 			// Check button1_flag == 1, then reset button1_flag = 0
+				setTimer4(250);
 				status = MANUAL;
 				setTimer3(10000); // Timer 3
 				clearLed();
 			}
 			break;
-		}
-		case Y_R: {
+		case Y_R:
 			trafficY_R();
 			if (timer1_flag == 1) {
 				status = R_G;
@@ -64,13 +63,13 @@ void fsm_automatic_run() {
 			}
 			if (isButtonPressed(0)) {
 			// Check button1_flag == 1, then reset button1_flag = 0
+				setTimer4(250);
 				status = MANUAL;
 				setTimer3(10000); // Timer 3
 				clearLed();
 			}
 			break;
-		}
-		case R_G: {
+		case R_G:
 			trafficR_G();
 			if (timer1_flag == 1) {
 				status = R_Y;
@@ -87,13 +86,13 @@ void fsm_automatic_run() {
 			}
 			if (isButtonPressed(0)) {
 			// Check button1_flag == 1, then reset button1_flag = 0
+				setTimer4(250);
 				status = MANUAL;
 				setTimer3(10000); // Timer 3
 				clearLed();
 			}
 			break;
-		}
-		case R_Y: {
+		case R_Y:
 			trafficR_Y();
 			if (timer1_flag == 1) {
 				status = G_R;
@@ -111,14 +110,13 @@ void fsm_automatic_run() {
 			}
 			if (isButtonPressed(0)) {
 			// Check button1_flag == 1, then reset button1_flag = 0
+				setTimer4(250);
 				status = MANUAL;
 				setTimer3(10000); // Timer 3
 				clearLed();
 			}
 			break;
-		}
-		default: {
+		default:
 			break;
-		}
 	}
 }

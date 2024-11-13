@@ -97,8 +97,11 @@ int main(void)
   MX_GPIO_Init();
   /* USER CODE BEGIN 2 */
   HAL_TIM_Base_Start_IT(&htim2);
+  initButton();
+  //setTimer5(2000);
   /* USER CODE END 2 */
-
+  setTimer5(250);
+  int i=0;
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
@@ -106,10 +109,19 @@ int main(void)
 	  fsm_automatic_run();
 	  fsm_manual_run();
 	  fsm_setting_run();
+
 	  if(timer5_flag == 1) {
-		  setTimer5(1000);
-		  HAL_GPIO_TogglePin(DOT_GPIO_Port, DOT_Pin);
-	  }
+	  		update7SEG(i++);
+	  		setTimer5(100);
+	  		if (i >= 4){
+	  			i = 0;
+
+	  		}
+	  	}
+//	  if(timer5_flag == 1) {
+//		  setTimer5(1000);
+//		  HAL_GPIO_TogglePin(DOT_GPIO_Port, DOT_Pin);
+//	  }
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -171,9 +183,9 @@ static void MX_TIM2_Init(void)
 
   /* USER CODE END TIM2_Init 1 */
   htim2.Instance = TIM2;
-  htim2.Init.Prescaler = 9;
+  htim2.Init.Prescaler = 7999;
   htim2.Init.CounterMode = TIM_COUNTERMODE_UP;
-  htim2.Init.Period = 7999;
+  htim2.Init.Period = 9;
   htim2.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
   htim2.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
   if (HAL_TIM_Base_Init(&htim2) != HAL_OK)
@@ -216,13 +228,11 @@ static void MX_GPIO_Init(void)
                           |EN2_Pin|EN3_Pin|DOT_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOB, SEG0_Pin|SEG1_Pin|SEG2_Pin|SEG9_Pin
-                          |SEG10_Pin|SEG11_Pin|SEG12_Pin|SEG13_Pin
-                          |SEG3_Pin|SEG4_Pin|SEG5_Pin|SEG6_Pin
-                          |SEG7_Pin|SEG8_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOB, SEG0_Pin|SEG1_Pin|SEG2_Pin|SEG3_Pin
+                          |SEG4_Pin|SEG5_Pin|SEG6_Pin, GPIO_PIN_RESET);
 
-  /*Configure GPIO pins : SELECT_Pin MOFIDY_Pin SET_Pin */
-  GPIO_InitStruct.Pin = SELECT_Pin|MOFIDY_Pin|SET_Pin;
+  /*Configure GPIO pins : SELECT_Pin MODIFY_Pin SET_Pin */
+  GPIO_InitStruct.Pin = SELECT_Pin|MODIFY_Pin|SET_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_PULLUP;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
@@ -238,14 +248,10 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : SEG0_Pin SEG1_Pin SEG2_Pin SEG9_Pin
-                           SEG10_Pin SEG11_Pin SEG12_Pin SEG13_Pin
-                           SEG3_Pin SEG4_Pin SEG5_Pin SEG6_Pin
-                           SEG7_Pin SEG8_Pin */
-  GPIO_InitStruct.Pin = SEG0_Pin|SEG1_Pin|SEG2_Pin|SEG9_Pin
-                          |SEG10_Pin|SEG11_Pin|SEG12_Pin|SEG13_Pin
-                          |SEG3_Pin|SEG4_Pin|SEG5_Pin|SEG6_Pin
-                          |SEG7_Pin|SEG8_Pin;
+  /*Configure GPIO pins : SEG0_Pin SEG1_Pin SEG2_Pin SEG3_Pin
+                           SEG4_Pin SEG5_Pin SEG6_Pin */
+  GPIO_InitStruct.Pin = SEG0_Pin|SEG1_Pin|SEG2_Pin|SEG3_Pin
+                          |SEG4_Pin|SEG5_Pin|SEG6_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
@@ -254,9 +260,11 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
-void timer_isr() { //10ms
-	timerRun();
-	getKeyinput();
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+{
+	timer_Run();
+	getKeyInput();
+
 }
 /* USER CODE END 4 */
 

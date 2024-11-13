@@ -60,8 +60,8 @@ void Error_Handler(void);
 /* Private defines -----------------------------------------------------------*/
 #define SELECT_Pin GPIO_PIN_1
 #define SELECT_GPIO_Port GPIOA
-#define MOFIDY_Pin GPIO_PIN_2
-#define MOFIDY_GPIO_Port GPIOA
+#define MODIFY_Pin GPIO_PIN_2
+#define MODIFY_GPIO_Port GPIOA
 #define SET_Pin GPIO_PIN_3
 #define SET_GPIO_Port GPIOA
 #define RED1_Pin GPIO_PIN_4
@@ -78,16 +78,6 @@ void Error_Handler(void);
 #define SEG1_GPIO_Port GPIOB
 #define SEG2_Pin GPIO_PIN_2
 #define SEG2_GPIO_Port GPIOB
-#define SEG9_Pin GPIO_PIN_10
-#define SEG9_GPIO_Port GPIOB
-#define SEG10_Pin GPIO_PIN_11
-#define SEG10_GPIO_Port GPIOB
-#define SEG11_Pin GPIO_PIN_12
-#define SEG11_GPIO_Port GPIOB
-#define SEG12_Pin GPIO_PIN_13
-#define SEG12_GPIO_Port GPIOB
-#define SEG13_Pin GPIO_PIN_14
-#define SEG13_GPIO_Port GPIOB
 #define YELLOW2_Pin GPIO_PIN_8
 #define YELLOW2_GPIO_Port GPIOA
 #define GREEN2_Pin GPIO_PIN_9
@@ -110,10 +100,6 @@ void Error_Handler(void);
 #define SEG5_GPIO_Port GPIOB
 #define SEG6_Pin GPIO_PIN_6
 #define SEG6_GPIO_Port GPIOB
-#define SEG7_Pin GPIO_PIN_8
-#define SEG7_GPIO_Port GPIOB
-#define SEG8_Pin GPIO_PIN_9
-#define SEG8_GPIO_Port GPIOB
 /* USER CODE BEGIN Private defines */
 
 /* USER CODE END Private defines */

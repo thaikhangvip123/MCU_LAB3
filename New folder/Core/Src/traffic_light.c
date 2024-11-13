@@ -44,38 +44,38 @@ void trafficR_Y() {
 	HAL_GPIO_WritePin(GREEN1_GPIO_Port, GREEN1_Pin, 	GPIO_PIN_RESET);
 }
 
-void updateTime() {
-	if(timerRed < 99) {
+//void updateTime() {
+//	if(timerRed < 99) {
+//		timerRed++;
+//		timerGreen++;
+//	}
+//	if(timerRed < 99) {
+//		timerGreen++;
+//		timerRed++;
+//	}
+//	if(timerYellow < 99 && timerYellow < timerGreen) {
+//		timerYellow++;
+//		timerRed++;
+//	}
+//}
+void updatetimerRed() {
+	if (timerRed < 99) {
 		timerRed++;
 		timerGreen++;
 	}
-	if(timerRed < 99) {
+}
+void updatetimerGreen() {
+	if (timerRed < 99) {
 		timerGreen++;
 		timerRed++;
 	}
-	if(timerYellow < 99 && timerYellow < timerGreen) {
+}
+void updatetimerYellow() {
+	if (timerRed < 99 && timerYellow < timerGreen) {
 		timerYellow++;
 		timerRed++;
 	}
 }
-//void updateRedTime() {
-//	if (redTime < 99) {
-//		redTime++;
-//		greenTime++;
-//	}
-//}
-//void updateGreenTime() {
-//	if (redTime < 99) {
-//		greenTime++;
-//		redTime++;
-//	}
-//}
-//void updateYellowTime() {
-//	if (redTime < 99 && yellowTime < greenTime) {
-//		yellowTime++;
-//		redTime++;
-//	}
-//}
 
 void setTimeRED(int countRed) {
 	timerRed = countRed;
@@ -89,10 +89,10 @@ void setTimeGREEN(int countGreen) {
 void RedBlinky() {
 	HAL_GPIO_TogglePin(RED1_GPIO_Port, RED1_Pin);
 	HAL_GPIO_TogglePin(RED2_GPIO_Port, RED2_Pin);
-	HAL_GPIO_WritePin(GREEN1_GPIO_Port, GREEN1_Pin, 	GPIO_PIN_RESET);
-	HAL_GPIO_WritePin(GREEN2_GPIO_Port, GREEN2_Pin, 	GPIO_PIN_RESET);
-	HAL_GPIO_WritePin(YELLOW1_GPIO_Port, YELLOW1_Pin, 	GPIO_PIN_RESET);
-	HAL_GPIO_WritePin(YELLOW2_GPIO_Port, YELLOW2_Pin, 	GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(GREEN1_GPIO_Port, GREEN1_Pin, 	RESET);
+	HAL_GPIO_WritePin(GREEN2_GPIO_Port, GREEN2_Pin, 	RESET);
+	HAL_GPIO_WritePin(YELLOW1_GPIO_Port, YELLOW1_Pin, 	RESET);
+	HAL_GPIO_WritePin(YELLOW2_GPIO_Port, YELLOW2_Pin, 	RESET);
 }
 void YellowBlinky() {
 	HAL_GPIO_WritePin(RED1_GPIO_Port, RED1_Pin, 		RESET);
@@ -103,12 +103,12 @@ void YellowBlinky() {
 	HAL_GPIO_TogglePin(YELLOW2_GPIO_Port, YELLOW2_Pin);
 }
 void GreenBlinky() {
-	HAL_GPIO_WritePin(RED1_GPIO_Port, RED1_Pin, 		GPIO_PIN_RESET);
-	HAL_GPIO_WritePin(RED2_GPIO_Port, RED2_Pin, 		GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(RED1_GPIO_Port, RED1_Pin, 		RESET);
+	HAL_GPIO_WritePin(RED2_GPIO_Port, RED2_Pin, 		RESET);
 	HAL_GPIO_TogglePin(GREEN1_GPIO_Port, GREEN1_Pin);
 	HAL_GPIO_TogglePin(GREEN2_GPIO_Port, GREEN2_Pin);
-	HAL_GPIO_WritePin(YELLOW1_GPIO_Port, YELLOW1_Pin, 	GPIO_PIN_RESET);
-	HAL_GPIO_WritePin(YELLOW2_GPIO_Port, YELLOW2_Pin, 	GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(YELLOW1_GPIO_Port, YELLOW1_Pin, 	RESET);
+	HAL_GPIO_WritePin(YELLOW2_GPIO_Port, YELLOW2_Pin, 	RESET);
 }
 void LedBlinky() {
 	HAL_GPIO_TogglePin(RED1_GPIO_Port, RED1_Pin);
@@ -119,10 +119,10 @@ void LedBlinky() {
 	HAL_GPIO_TogglePin(YELLOW2_GPIO_Port, YELLOW2_Pin);
 }
 void clearLed() {
-	HAL_GPIO_WritePin(RED2_GPIO_Port, RED2_Pin, 		GPIO_PIN_RESET);
-	HAL_GPIO_WritePin(YELLOW2_GPIO_Port, YELLOW2_Pin, 	GPIO_PIN_RESET);
-	HAL_GPIO_WritePin(GREEN2_GPIO_Port, GREEN2_Pin, 	GPIO_PIN_RESET);
-	HAL_GPIO_WritePin(RED1_GPIO_Port, RED1_Pin, 		GPIO_PIN_RESET);
-	HAL_GPIO_WritePin(YELLOW1_GPIO_Port, YELLOW1_Pin, 	GPIO_PIN_RESET);
-	HAL_GPIO_WritePin(GREEN1_GPIO_Port, GREEN1_Pin, 	GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(RED2_GPIO_Port, RED2_Pin, 		RESET);
+	HAL_GPIO_WritePin(YELLOW2_GPIO_Port, YELLOW2_Pin, 	RESET);
+	HAL_GPIO_WritePin(GREEN2_GPIO_Port, GREEN2_Pin, 	RESET);
+	HAL_GPIO_WritePin(RED1_GPIO_Port, RED1_Pin, 		RESET);
+	HAL_GPIO_WritePin(YELLOW1_GPIO_Port, YELLOW1_Pin, 	RESET);
+	HAL_GPIO_WritePin(GREEN1_GPIO_Port, GREEN1_Pin, 	RESET);
 }

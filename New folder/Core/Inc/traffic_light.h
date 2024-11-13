@@ -19,7 +19,10 @@ void trafficY_R();
 void trafficR_G();
 void trafficR_Y();
 
-void updateTime();
+void updatetimerRed();
+void updatetimerYellow();
+void updatetimerGreen();
+
 void setTimeRED();
 void setTimeYELLOW();
 void setTimeGREEN();

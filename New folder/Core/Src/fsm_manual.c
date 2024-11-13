@@ -6,14 +6,14 @@
  */
 #include "fsm_manual.h"
 
-int mode = 0;
+int mode = 1;
 int countRed = 0;
 int countYellow = 0;
 int countGreen = 0;
 
 void fsm_manual_run() {
 	switch(status) {
-		case MANUAL: {
+		case MANUAL:
 			updateClockBuffer2(mode);
 			updateClockBuffer1(0);
 			if (timer4_flag == 1) {
@@ -32,8 +32,7 @@ void fsm_manual_run() {
 				clearLed();
 			}
 			break;
-		}
-		case MODE2: {
+		case MODE2:
 			if (timer4_flag == 1) {
 				setTimer4(500); // Timer 4
 				RedBlinky(); // Blink 2Hz
@@ -51,7 +50,7 @@ void fsm_manual_run() {
 				break;
 			}
 			if (isButtonPressed(1)) { // BTN2 pressed, update value
-				updateTime();
+				updatetimerRed();
 				updateClockBuffer1(timerRed);
 				break;
 			}
@@ -63,8 +62,7 @@ void fsm_manual_run() {
 				break;
 			}
 			break;
-		}
-		case MODE3: {
+		case MODE3:
 			if (timer4_flag == 1) {
 				setTimer4(500); // Timer 4
 				YellowBlinky(); // Blink 2Hz
@@ -82,7 +80,7 @@ void fsm_manual_run() {
 				break;
 			}
 			if (isButtonPressed(1)) { // BTN2 pressed, update value
-				updateTime();
+				updatetimerYellow();
 				updateClockBuffer1(timerYellow);
 				break;
 			}
@@ -94,8 +92,7 @@ void fsm_manual_run() {
 				break;
 			}
 			break;
-		}
-		case MODE4: {
+		case MODE4:
 			if (timer4_flag == 1) {
 				setTimer4(500); // Timer 4
 				GreenBlinky(); // Blink 2Hz
@@ -114,7 +111,7 @@ void fsm_manual_run() {
 				break;
 			}
 			if (isButtonPressed(1)) { // BTN2 pressed, update value
-				updateTime();
+				updatetimerGreen();
 				updateClockBuffer1(timerGreen);
 				break;
 			}
@@ -126,9 +123,7 @@ void fsm_manual_run() {
 				break;
 			}
 			break;
-		}
-		default: {
+		default:
 			break;
-		}
 	}
 }
