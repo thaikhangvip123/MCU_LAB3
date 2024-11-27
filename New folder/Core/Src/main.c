@@ -30,6 +30,7 @@
 #include "led7_segment.h"
 #include "software_timer.h"
 #include "traffic_light.h"
+#include "scheduler.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
