@@ -97,32 +97,15 @@ int main(void)
   MX_TIM2_Init();
   MX_GPIO_Init();
   /* USER CODE BEGIN 2 */
+
   HAL_TIM_Base_Start_IT(&htim2);
-  initButton();
-  //setTimer5(2000);
+  SCH_Init();
   /* USER CODE END 2 */
-  setTimer5(250);
-  int i=0;
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  fsm_automatic_run();
-	  fsm_manual_run();
-	  fsm_setting_run();
-
-	  if(timer5_flag == 1) {
-	  		update7SEG(i++);
-	  		setTimer5(100);
-	  		if (i >= 4){
-	  			i = 0;
-
-	  		}
-	  	}
-//	  if(timer5_flag == 1) {
-//		  setTimer5(1000);
-//		  HAL_GPIO_TogglePin(DOT_GPIO_Port, DOT_Pin);
-//	  }
+	  SCH_Dispatch_Tasks();
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -263,9 +246,9 @@ static void MX_GPIO_Init(void)
 /* USER CODE BEGIN 4 */
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
-	timer_Run();
-	getKeyInput();
-
+//	timer_Run();
+//	getKeyInput();
+	SCH_Update();
 }
 /* USER CODE END 4 */
 
