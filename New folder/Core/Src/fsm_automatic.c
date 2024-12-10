@@ -18,15 +18,15 @@ void fsm_automatic_run() {
 				cdY = timerRed - 1;
 				updateClockBuffer2(cdX);
 				updateClockBuffer1(cdY);
-				setTimer1(timerGreen * 1000); // Timer 1
-				setTimer2(1000);
+//				setTimer1(timerGreen * 1000); // Timer 1
+//				setTimer2(1000);
 			}
 			break;
 		case G_R:
 			trafficG_R();
 			if (timer1_flag == 1) {
 				status = Y_R;
-				setTimer1(timerYellow * 1000); // Timer 1
+//				setTimer1(timerYellow * 1000); // Timer 1
 				cdX = timerYellow - 1;
 			}
 			if (timer2_flag == 1) {
@@ -35,13 +35,13 @@ void fsm_automatic_run() {
 				updateClockBuffer1(cdY);
 				cdX--;
 				cdY--;
-				setTimer2(1000); // Timer 2
+//				setTimer2(1000); // Timer 2
 			}
 			if (isButtonPressed(0)) {
 			// Check button1_flag == 1, then reset button1_flag = 0
-				setTimer4(250);
+//				setTimer4(250);
 				status = MANUAL;
-				setTimer3(10000); // Timer 3
+//				setTimer3(10000); // Timer 3
 				clearLed();
 			}
 			break;
@@ -49,7 +49,7 @@ void fsm_automatic_run() {
 			trafficY_R();
 			if (timer1_flag == 1) {
 				status = R_G;
-				setTimer1(timerGreen * 1000); // Timer 1
+//				setTimer1(timerGreen * 1000); // Timer 1
 				cdX = timerRed - 1;
 				cdY = timerGreen - 1;
 			}
@@ -59,13 +59,13 @@ void fsm_automatic_run() {
 				updateClockBuffer1(cdY);
 				cdX--;
 				cdY--;
-				setTimer2(1000); // Timer 2
+//				setTimer2(1000); // Timer 2
 			}
 			if (isButtonPressed(0)) {
 			// Check button1_flag == 1, then reset button1_flag = 0
-				setTimer4(250);
+//				setTimer4(250);
 				status = MANUAL;
-				setTimer3(10000); // Timer 3
+//				setTimer3(10000); // Timer 3
 				clearLed();
 			}
 			break;
@@ -73,7 +73,7 @@ void fsm_automatic_run() {
 			trafficR_G();
 			if (timer1_flag == 1) {
 				status = R_Y;
-				setTimer1(timerYellow * 1000); // Timer 1
+//				setTimer1(timerYellow * 1000); // Timer 1
 				cdY = timerYellow - 1;
 			}
 			if (timer2_flag == 1) {
@@ -82,13 +82,13 @@ void fsm_automatic_run() {
 				updateClockBuffer1(cdY);
 				cdX--;
 				cdY--;
-				setTimer2(1000); // Timer 2
+//				setTimer2(1000); // Timer 2
 			}
 			if (isButtonPressed(0)) {
 			// Check button1_flag == 1, then reset button1_flag = 0
-				setTimer4(250);
+//				setTimer4(250);
 				status = MANUAL;
-				setTimer3(10000); // Timer 3
+//				setTimer3(10000); // Timer 3
 				clearLed();
 			}
 			break;
@@ -96,7 +96,7 @@ void fsm_automatic_run() {
 			trafficR_Y();
 			if (timer1_flag == 1) {
 				status = G_R;
-				setTimer1(timerGreen * 1000); // Timer 1
+//				setTimer1(timerGreen * 1000); // Timer 1
 				cdX = timerGreen - 1;
 				cdY = timerRed - 1;
 			}
@@ -106,13 +106,13 @@ void fsm_automatic_run() {
 				updateClockBuffer1(cdY);
 				cdX--;
 				cdY--;
-				setTimer2(1000); // Timer 2
+//				setTimer2(1000); // Timer 2
 			}
 			if (isButtonPressed(0)) {
 			// Check button1_flag == 1, then reset button1_flag = 0
-				setTimer4(250);
+//				setTimer4(250);
 				status = MANUAL;
-				setTimer3(10000); // Timer 3
+//				setTimer3(10000); // Timer 3
 				clearLed();
 			}
 			break;
@@ -120,3 +120,13 @@ void fsm_automatic_run() {
 			break;
 	}
 }
+
+void updateDisplay() {
+    if (status == G_R || status == Y_R || status == R_G || status == R_Y) {
+        updateClockBuffer2(cdX);
+        updateClockBuffer1(cdY);
+        if (cdX > 0) cdX--;
+        if (cdY > 0) cdY--;
+    }
+}
+

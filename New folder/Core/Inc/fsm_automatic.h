@@ -15,5 +15,5 @@ extern int cdX;
 extern int cdY;
 
 void fsm_automatic_run();
-
+void updateDisplay();
 #endif /* INC_FSM_AUTOMATIC_H_ */
