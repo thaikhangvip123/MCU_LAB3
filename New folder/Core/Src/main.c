@@ -99,10 +99,13 @@ int main(void)
   /* USER CODE BEGIN 2 */
 
   HAL_TIM_Base_Start_IT(&htim2);
+  initButton();
+
   SCH_Init();
 
-  SCH_Add_Task(fsm_automatic_run, 0, 1);
-  SCH_Add_Task(updateDisplay, 0, 1000);
+  SCH_Add_Task(fsm_automatic_run, 250, 250);
+
+
 
   SCH_Add_Task(getKeyInput, 10, 10);
   /* USER CODE END 2 */
