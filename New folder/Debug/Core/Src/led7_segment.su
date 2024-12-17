@@ -3,5 +3,5 @@ led7_segment.c:17:6:display7SEG	32	static
 led7_segment.c:23:6:enable	16	static
 led7_segment.c:26:6:EnableLed	8	static
 led7_segment.c:33:6:update7SEG	16	static
-led7_segment.c:61:6:updateClockBuffer1	16	static
-led7_segment.c:65:6:updateClockBuffer2	16	static
+led7_segment.c:61:6:updateClockBufferY	16	static
+led7_segment.c:65:6:updateClockBufferX	16	static

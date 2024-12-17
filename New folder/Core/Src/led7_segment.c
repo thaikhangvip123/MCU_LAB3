@@ -58,11 +58,11 @@ void update7SEG(int index) {
 			break;
 	}
 }
-void updateClockBuffer1(int value) {
+void updateClockBufferY(int value) {
 	buffer7SEG[0] = value / 10;
 	buffer7SEG[1] = value % 10;
 }
-void updateClockBuffer2(int value) {
+void updateClockBufferX(int value) {
 	buffer7SEG[2] = value / 10;
 	buffer7SEG[3] = value % 10;
 }

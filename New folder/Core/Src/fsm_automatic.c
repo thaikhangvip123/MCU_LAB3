@@ -10,90 +10,86 @@ int cdX = 0;
 int cdY = 0;
 
 void countdown() {
-	int index = 0;
-	update7SEG(index++);
-	if(index >= 4) {
+	count7SEG++;
+	if(count7SEG >= 4) {
 		cdX--;
 		cdY--;
-		index = 0;
+		count7SEG = 0;
 	}
+}
+void updateClock() {
+        updateClockBufferX(cdX);
+        updateClockBufferY(cdY);
 }
 
 void fsm_automatic_run() {
 	switch(status) {
 		case AUTO:
-			if (1) {
-				status = G_R;
-				cdX = timerGreen - 1;
-				cdY = timerRed - 1;
-				updateClockBuffer2(cdX);
-				updateClockBuffer1(cdY);
-			}
+			status = G_R;
+			cdX = timerGreen - 1;
+			cdY = timerRed - 1;
+			SCH_Add_Task(trafficG_R, 10, 3000);
+			SCH_Add_Task(updateClock, 10, 1000);
+
 			break;
 		case G_R:
-			trafficG_R();
 			cdX--;
 			cdY--;
-			status = Y_R;
 			if(cdX == 0) {
 				status = Y_R;
 				cdX = timerYellow - 1;
+				SCH_Add_Task(trafficY_R, 10, 2000);
 			}
-			// UPDATE DISPLAY
-			updateClockBuffer2(cdX);
-			updateClockBuffer1(cdY);
+
 			if (isButtonPressed(0)) {
 				status = MANUAL;
+				SCH_Delete_Task(updateClock);
 				clearLed();
 			}
 			break;
 		case Y_R:
-			trafficY_R();
 			cdX--;
 			cdY--;
 			if(cdX == 0 || cdY == 0) {
 				status = R_G;
 				cdX = timerRed - 1;
 				cdY = timerGreen - 1;
+				SCH_Add_Task(trafficR_G, 0, 5000);
 			}
-			// UPDATE DISPLAY
-			updateClockBuffer2(cdX);
-			updateClockBuffer1(cdY);
 			if (isButtonPressed(0)) {
 				status = MANUAL;
+				SCH_Delete_Task(updateClock);
 				clearLed();
 			}
 			break;
 		case R_G:
-			trafficR_G();
 			cdX--;
 			cdY--;
 			if(cdY == 0) {
 				status = R_Y;
 				cdY = timerYellow - 1;
+				SCH_Add_Task(trafficR_Y, 0, 2000);
 			}
 			// UPDATE DISPLAY
-			updateClockBuffer2(cdX);
-			updateClockBuffer1(cdY);
 			if (isButtonPressed(0)) {
 				status = MANUAL;
+				SCH_Delete_Task(updateClock);
 				clearLed();
 			}
 			break;
 		case R_Y:
-			trafficR_Y();
 			cdX--;
 			cdY--;
 			if(cdX == 0 || cdY == 0) {
 				status = G_R;
 				cdX = timerGreen - 1;
 				cdY = timerRed - 1;
+				SCH_Add_Task(trafficG_R, 0, 3000);
 			}
 			// UPDATE DISPLAY
-			updateClockBuffer2(cdX);
-			updateClockBuffer1(cdY);
 			if (isButtonPressed(0)) {
 				status = MANUAL;
+				SCH_Delete_Task(updateClock);
 				clearLed();
 			}
 			break;
@@ -102,12 +98,4 @@ void fsm_automatic_run() {
 	}
 }
 
-//void updateDisplay() {
-//    if (status == G_R || status == Y_R || status == R_G || status == R_Y) {
-//        updateClockBuffer2(cdX);
-//        updateClockBuffer1(cdY);
-//        if (cdX > 0) cdX--;
-//        if (cdY > 0) cdY--;
-//    }
-//}
 

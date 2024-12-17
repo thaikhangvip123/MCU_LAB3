@@ -103,7 +103,7 @@ int main(void)
 
   SCH_Init();
 
-  SCH_Add_Task(fsm_automatic_run, 250, 250);
+  SCH_Add_Task(fsm_automatic_run, 0, 250);
 
 
 

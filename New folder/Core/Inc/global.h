@@ -29,4 +29,8 @@
 extern int status;
 //extern int status2;
 
+extern int count7SEG;
+extern int ledDuration;
+
+void check_timer_and_display(int mode, int duration);
 #endif /* INC_GLOBAL_H_ */

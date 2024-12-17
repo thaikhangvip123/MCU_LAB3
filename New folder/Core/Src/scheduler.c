@@ -6,8 +6,6 @@
  */
 
 #include "scheduler.h"
-
-
 void SCH_Init() {
 	unsigned char index;
 	for (index = 0; index < SCH_MAX_TASKS; index++) {
@@ -48,19 +46,18 @@ unsigned char SCH_Add_Task(void (*pFunction) (), unsigned int DELAY, unsigned in
 	}
 	// The array is not full
 	SCH_tasks_G[index].pTask = pFunction;
-	SCH_tasks_G[index].Delay = DELAY;
-	SCH_tasks_G[index].Period = PERIOD;
+	SCH_tasks_G[index].Delay = DELAY / TICK;
+	SCH_tasks_G[index].Period = PERIOD / TICK;
 	SCH_tasks_G[index].RunMe = 0;
 	return index;
 }
 
 void SCH_Dispatch_Tasks(void) {
-	unsigned char index;
+	uint8_t index;
 	for (index = 0; index < SCH_MAX_TASKS; index++) {
 		if (SCH_tasks_G[index].RunMe > 0) {
 			(*SCH_tasks_G[index].pTask) (); // Run the task
 			SCH_tasks_G[index].RunMe -= 1; // Reset / reduce RunMe flag
-
 			if (SCH_tasks_G[index].Period == 0) {
 				SCH_Delete_Task(index);
 			}
@@ -68,7 +65,7 @@ void SCH_Dispatch_Tasks(void) {
 	}
 }
 
-unsigned char SCH_Delete_Task(uint32_t TASK_INDEX) {
+uint8_t SCH_Delete_Task(uint32_t TASK_INDEX) {
 	if (SCH_tasks_G[TASK_INDEX].pTask == 0) {
 		Error_code_G = ERROR_SCH_CANNOT_DELETE_TASK;
 		Return_code = RETURN_ERROR;

@@ -14,12 +14,13 @@ int countGreen = 0;
 void fsm_manual_run() {
 	switch(status) {
 		case MANUAL:
-			updateClockBuffer2(mode);
-			updateClockBuffer1(0);
-			if (timer4_flag == 1) {
-				setTimer4(500); // Timer 4
-				LedBlinky(); // Blink 2Hz
-			}
+			updateClockBufferX(mode);
+			updateClockBufferY(0);
+//			if (timer4_flag == 1) {
+//				setTimer4(500); // Timer 4
+//				LedBlinky(); // Blink 2Hz
+//			}
+			LedBlinky();
 			if (isButtonPressed(0)) {
 				status = MODE2;
 				mode = 2;
@@ -27,16 +28,17 @@ void fsm_manual_run() {
 				countRed = timerRed;
 				countYellow = timerYellow;
 				countGreen = timerGreen;
-				updateClockBuffer2(mode);
-				updateClockBuffer1(timerRed);
+				updateClockBufferX(mode);
+				updateClockBufferY(timerRed);
 				clearLed();
 			}
 			break;
 		case MODE2:
-			if (timer4_flag == 1) {
-				setTimer4(500); // Timer 4
-				RedBlinky(); // Blink 2Hz
-			}
+//			if (timer4_flag == 1) {
+//				setTimer4(500); // Timer 4
+//				RedBlinky(); // Blink 2Hz
+//			}
+			RedBlinky();
 			if (isButtonPressed(0)) { // BTN1 pressed, update status and discard value
 				status = MODE3;
 				mode = 3;
@@ -44,29 +46,30 @@ void fsm_manual_run() {
 				setTimeRED(countRed);
 				setTimeYELLOW(countYellow);
 				setTimeGREEN(countGreen);
-				updateClockBuffer2(mode);
-				updateClockBuffer1(timerYellow);
+				updateClockBufferX(mode);
+				updateClockBufferY(timerYellow);
 				clearLed();
 				break;
 			}
 			if (isButtonPressed(1)) { // BTN2 pressed, update value
 				updatetimerRed();
-				updateClockBuffer1(timerRed);
+				updateClockBufferY(timerRed);
 				break;
 			}
 			if (isButtonPressed(2)) { // BTN3 pressed, save the value -> update Time
 				status = MANUAL;
-				setTimer3(10000); // Timer 3
+//				setTimer3(10000); // Timer 3
 				clearLed();
 				mode = 0;
 				break;
 			}
 			break;
 		case MODE3:
-			if (timer4_flag == 1) {
-				setTimer4(500); // Timer 4
-				YellowBlinky(); // Blink 2Hz
-			}
+//			if (timer4_flag == 1) {
+//				setTimer4(500); // Timer 4
+//				YellowBlinky(); // Blink 2Hz
+//			}
+			YellowBlinky();
 			if (isButtonPressed(0)) { // BTN1 pressed, update status and discard value
 				status = MODE4;
 				mode = 4;
@@ -74,50 +77,51 @@ void fsm_manual_run() {
 				setTimeRED(countRed);
 				setTimeYELLOW(countYellow);
 				setTimeGREEN(countGreen);
-				updateClockBuffer2(mode);
-				updateClockBuffer1(timerGreen);
+				updateClockBufferX(mode);
+				updateClockBufferY(timerGreen);
 				clearLed();
 				break;
 			}
 			if (isButtonPressed(1)) { // BTN2 pressed, update value
 				updatetimerYellow();
-				updateClockBuffer1(timerYellow);
+				updateClockBufferY(timerYellow);
 				break;
 			}
 			if (isButtonPressed(2)) { // BTN3 pressed, save the value -> update Time
 				status = MANUAL;
-				setTimer3(10000); // Timer 3
+//				setTimer3(10000); // Timer 3
 				clearLed();
 				mode = 0;
 				break;
 			}
 			break;
 		case MODE4:
-			if (timer4_flag == 1) {
-				setTimer4(500); // Timer 4
-				GreenBlinky(); // Blink 2Hz
-			}
+//			if (timer4_flag == 1) {
+//				setTimer4(500); // Timer 4
+//				GreenBlinky(); // Blink 2Hz
+//			}
+			GreenBlinky();
 			if (isButtonPressed(0)) { // BTN1 pressed, update status and discard value
 				status = MANUAL;
-				setTimer3(10000); // Timer 3
+//				setTimer3(10000); // Timer 3
 				clearLed();
 				mode = 0;
 				// Adjust Time to the original, not save the updated value
 				setTimeRED(countRed);
 				setTimeYELLOW(countYellow);
 				setTimeGREEN(countGreen);
-				updateClockBuffer2(mode);
-				updateClockBuffer1(0);
+				updateClockBufferX(mode);
+				updateClockBufferY(0);
 				break;
 			}
 			if (isButtonPressed(1)) { // BTN2 pressed, update value
 				updatetimerGreen();
-				updateClockBuffer1(timerGreen);
+				updateClockBufferY(timerGreen);
 				break;
 			}
 			if (isButtonPressed(2)) { // BTN3 pressed, save the value -> update Time
 				status = MANUAL;
-				setTimer3(10000); // Timer 3
+//				setTimer3(10000); // Timer 3
 				clearLed();
 				mode = 0;
 				break;

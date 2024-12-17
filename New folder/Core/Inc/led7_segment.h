@@ -15,7 +15,7 @@ extern int controllPin7SEG[4];
 void clearLed();
 void display7SEG(int num);
 void update7SEG(int index);
-void updateClockBuffer1();
-void updateClockBuffer2();
+void updateClockBufferY();
+void updateClockBufferX();
 
 #endif /* INC_LED7_SEGMENT_H_ */
